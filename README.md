@@ -24,6 +24,6 @@ To adjust time spent training, modify the total_timesteps parameter in the call 
 To view a "replay" of the model's performance by conducting a test run, use the script replay_model.py in the same directory with 
 
 ```sh
-python grouplearn.py
+python replay_model.py
 ```
 By modifying the filepath of variable "folder" to the desired subdirectory in the results folder, the model from that run will be used.
