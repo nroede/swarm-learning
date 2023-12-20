@@ -2,7 +2,7 @@ import numpy as np
 from gym_pybullet_drones.envs.BaseAviary import BaseAviary
 
 class HW2Control():
-    """Control class for assignment 2."""
+    """Control class for swarm_motion_sim."""
 
     ################################################################################
 
@@ -43,24 +43,12 @@ class HW2Control():
         self.d_coeff_position = {}
         """dict[str, float]: Derivative coefficient(s) for position control."""
 
-        ############################################################
-        ############################################################
-        #### HOMEWORK CODE (START) #################################
-        ############################################################
-        ############################################################
-
-        # Objective 1 of 4: fill appropriate values in the 3 by 3 matrix
         self.matrix_u2rpm = np.array([ [2,   1,   1],
                                        [0,   1,  -1],
                                        [2,  -1,  -1] 
                                       ])
         """ndarray: (3, 3)-shaped array of ints to determine motor rpm from force and torque."""
 
-        ############################################################
-        ############################################################
-        #### HOMEWORK CODE (END) ###################################
-        ############################################################
-        ############################################################
 
         self.matrix_u2rpm_inv = np.linalg.inv(self.matrix_u2rpm)
 
@@ -148,30 +136,10 @@ class HW2Control():
                                     "r"
                                     )
 
-        ############################################################
-        ############################################################
-        #### HOMEWORK CODE (START) #################################
-        ############################################################
-        ############################################################
-        
-        # Variables that you might use
-        #   self.g
-        #   self.mass
-        #   self.inertia_xx
-        #   y_ddot
-        #   z_ddot
-        #   roll_ddot
-        #   current_rpy[0], current_rpy[1], current_rpy[2]
-        # Basic math and NumPy
-        #   sine(x) -> np.sin(x)
-        #   cosine(x) -> np.cos(x)
-        #   x squared -> x**2
-        #   square root of x -> np.sqrt(x)
-
         ##### Calculate thrust and moment given the PD input #######
         if self.CTRL_TYPE == 0:
             #### Linear Control ########################################
-            # Objective 2 of 4: compute u_1 for the linear controller
+            # Compute u_1 for the linear controller
             u_1 = self.mass * (self.g + z_ddot)
 
         elif self.CTRL_TYPE == 1:
@@ -180,17 +148,11 @@ class HW2Control():
 
         elif self.CTRL_TYPE == 2:
             #### Nonlinear Control 2 ###################################
-            # Objective 3 of 4: compute u_1 for the second nonlinear controller
+            # Compute u_1 for the second nonlinear controller
             u_1 = self.mass * np.sqrt(y_ddot**2+(self.g + z_ddot)**2)
 
-        # Objective 4 of 4: compute u_2
+        # Compute u_2
         u_2 = self.inertia_xx * roll_ddot
-
-        ############################################################
-        ############################################################
-        #### HOMEWORK CODE (END) ###################################
-        ############################################################
-        ############################################################
         
         ##### Calculate RPMs #######################################
         u = np.array([ [u_1 / self.kf_coeff],

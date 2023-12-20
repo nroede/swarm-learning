@@ -1,11 +1,5 @@
 """" The script uses the control defined in file `swarm_motion_ctrl.py`.
 
-Example
--------
-To run the simulation, type in a terminal:
-
-    $ python swarm_motion_sim.py
-
 """
 import time
 import random

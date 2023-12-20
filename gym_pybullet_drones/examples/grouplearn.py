@@ -1,18 +1,4 @@
-"""Script demonstrating the use of `gym_pybullet_drones`'s Gymnasium interface.
-
-Classes HoverAviary and MultiHoverAviary are used as learning envs for the PPO algorithm.
-
-Example
--------
-In a terminal, run as:
-
-    $ python learn.py --multiagent false
-    $ python learn.py --multiagent true
-
-Notes
------
-This is a minimal working example integrating `gym-pybullet-drones` with 
-reinforcement learning library `stable-baselines3`.
+"""Script allowing for group swarm learning based on GroupAviary.
 
 """
 import os
