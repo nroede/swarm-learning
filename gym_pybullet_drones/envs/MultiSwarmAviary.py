@@ -3,14 +3,14 @@ import numpy as np
 from gym_pybullet_drones.envs.BaseRLAviary import BaseRLAviary
 from gym_pybullet_drones.utils.enums import DroneModel, Physics, ActionType, ObservationType
 
-class MultiHoverAviary(BaseRLAviary):
+class MultiSwarmAviary(BaseRLAviary):
     """Multi-agent RL problem: leader-follower."""
 
     ################################################################################
 
     def __init__(self,
                  drone_model: DroneModel=DroneModel.CF2X,
-                 num_drones: int=2,
+                 num_drones: int=3,
                  neighbourhood_radius: float=np.inf,
                  initial_xyzs=None,
                  initial_rpys=None,
@@ -69,7 +69,7 @@ class MultiHoverAviary(BaseRLAviary):
                          act=act
                          )
         
-        self.TARGET_POS = self.INIT_XYZS + np.array([0,0,1])
+        self.TARGET_POS = self.INIT_XYZS + np.array([[0,0,1] for i in range(num_drones)])
 
     ################################################################################
     
@@ -85,9 +85,7 @@ class MultiHoverAviary(BaseRLAviary):
         states = np.array([self._getDroneStateVector(i) for i in range(self.NUM_DRONES)])
         ret = 0
         for i in range(self.NUM_DRONES):
-            # ret += -1 * np.linalg.norm(self.TARGET_POS[i,:]-states[i][0:3])**2
-            ret += -1 * (abs(1 - states[i][2]))
-            # ret += max(0, 2 - np.linalg.norm(self.TARGET_POS[i,:]-states[i][0:3])**4)
+            ret += max(0, 2 - np.linalg.norm(self.TARGET_POS[i,:]-states[i][0:3])**4)
         return ret
 
     ################################################################################
