@@ -19,7 +19,9 @@ python grouplearn.py
 ```
 If the script is run from another directory, a results subdirectory will be created and the results placed in there under the running time of the script.
 
-To adjust time spent training, modify the total_timesteps parameter in the call to model.learn. Training with 3,000,000 timesteps currently results in a training time of a few hours. For a quick training model, use a timestep amount in the region of 30,000 or slightly more.
+To adjust time spent training, modify the total_timesteps parameter in the call to model.learn. Training with 3,000,000 timesteps currently results in a training time of a few hours. For a quick training model, use a timestep amount in the region of 30,000 or slightly more. Adjusting number of drones in the swarm can be done by changing the value of DEFAULT_AGENTS.
+
+Adjusting other parameters, including the reward function, episode length, observation/action type, or neighbourhood & crowding radius, can be done by modifying teh GroupAviary class in gym_pybullet_drones/envs/GroupAviary.py, which implements the gym_pybullet_drones/envs/BaseRLAviary.py as a superclass.
 
 To view a "replay" of the model's performance by conducting a test run, use the script replay_model.py in the same directory with 
 
